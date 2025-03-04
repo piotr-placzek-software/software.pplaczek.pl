@@ -1,0 +1,24 @@
+<div class="app-terminal-table-output">
+  <table class="border-collapse">
+    <thead *ngIf="hasHeader">
+      <tr>
+        <th
+          *ngFor="let cell of tableHeader; let i = index"
+          [ngClass]="{ 'pl-4': i !== 0 }"
+        >
+          {{ cell }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of tableBody">
+        <td
+          *ngFor="let cell of row; let i = index"
+          [ngClass]="{ 'pl-4': i !== 0 }"
+        >
+          {{ cell }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

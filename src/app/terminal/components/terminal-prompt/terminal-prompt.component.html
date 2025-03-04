@@ -1,0 +1,11 @@
+<div class="app-terminal-prompt">
+  <span class="username">{{ username }}</span>
+  <span class="at">&#64;</span>
+  <span class="hostname">{{ hostname }}</span>
+  <span class="colon">:</span>
+  <span class="path-element" *ngFor="let dir of workingDirectory"
+    >{{ dir }}/</span
+  >
+  <span class="dollar">$</span>
+  <span class="static-value pl-2">{{ staticValue }}</span>
+</div>

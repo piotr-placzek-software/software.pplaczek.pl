@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+@theme {
+  --color-terminal-yellow:#E0AF68;
+  --color-terminal-green: #9ECE6A;
+  --color-terminal-gray:  #414868;
+  --color-terminal-blue:  #7AA2F7;
+  --color-terminal-red:   #F7768E;
+  --color-terminal-dark:  #1A1B26;
+  --color-terminal-light: #C0CAF5;
+}
+
+body {
+  // background-image: url('/background.webp');
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  // background-position: center center;
+  background-image: url('/bg-pattern.png');
+}
