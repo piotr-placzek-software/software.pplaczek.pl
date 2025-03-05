@@ -1,6 +1,7 @@
 export const SupportedCommandOutputTypes = [
   'clear',
   'simple',
+  'print-file',
   'help',
   'reset',
 ] as const;
@@ -60,4 +61,19 @@ export class ResetCommandOutput implements CommandOutput<undefined> {
   public readonly type = 'reset';
   public readonly data = undefined;
   public readonly command = { cmd: 'reset', argv: [] };
+}
+
+export type PrintFileCommandOutputDataType = {
+  content: string;
+  format: 'plain' | 'markdown';
+  rich: boolean;
+};
+export class PrintFileCommandOutput
+  implements CommandOutput<PrintFileCommandOutputDataType>
+{
+  public readonly type = 'print-file';
+  constructor(
+    public readonly command: CommandSrc,
+    public readonly data: PrintFileCommandOutputDataType,
+  ) {}
 }

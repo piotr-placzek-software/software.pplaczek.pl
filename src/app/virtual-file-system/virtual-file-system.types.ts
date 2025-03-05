@@ -13,5 +13,6 @@ export type VFSNodeDir = VFSNodeBase & {
 
 export type VFSNodeFile = VFSNodeBase & {
   type: 'file';
+  format: 'plain' | 'markdown';
   content: string;
 };

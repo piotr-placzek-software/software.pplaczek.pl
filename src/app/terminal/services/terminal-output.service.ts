@@ -4,10 +4,12 @@ import { TerminalSimpleOutputComponent } from '../components/teminal-simple-outp
 import { TerminalPromptComponent } from '../components/terminal-prompt/terminal-prompt.component';
 import { TerminalTableOutputComponent } from '../components/terminal-table-output/terminal-table-output.component';
 import { VirtualFileSystemService } from '../../virtual-file-system/services/virtual-file-system.service';
+import { TerminalComplexOutputComponent } from '../components/terminal-complex-output/terminal-complex-output.component';
 
 type TerminalOutputComponent =
   | TerminalSimpleOutputComponent
-  | TerminalTableOutputComponent;
+  | TerminalTableOutputComponent
+  | TerminalComplexOutputComponent;
 
 @Injectable()
 export class TerminalOutputService {
@@ -50,6 +52,14 @@ export class TerminalOutputService {
         this.createOutputComponent(
           container,
           TerminalSimpleOutputComponent,
+          data,
+        );
+        break;
+
+      case 'print-file':
+        this.createOutputComponent(
+          container,
+          TerminalComplexOutputComponent,
           data,
         );
         break;

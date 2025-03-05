@@ -5,6 +5,7 @@ import { ClearTerminalCommandService } from './clear-terminal-command.service';
 import { LsTerminalCommandService } from './ls-terminal-command.service';
 import { CdTerminalCommandService } from './cd-terminal-command.service';
 import { ResetTerminalCommandService } from './reset-terminal-command.service';
+import { CatTerminalCommandService } from './cat-terminal-command.service';
 
 export abstract class TerminalCommand {
   public abstract readonly command: Command;
@@ -16,6 +17,7 @@ export const providers = [
   LsTerminalCommandService,
   CdTerminalCommandService,
   ResetTerminalCommandService,
+  CatTerminalCommandService,
 ];
 
 @Injectable()
@@ -26,6 +28,7 @@ export class SupportedTerminalCommandsService {
     private readonly ls: LsTerminalCommandService,
     private readonly cd: CdTerminalCommandService,
     private readonly reset: ResetTerminalCommandService,
+    private readonly cat: CatTerminalCommandService,
   ) {}
 
   get commands(): Command[] {
@@ -35,6 +38,7 @@ export class SupportedTerminalCommandsService {
       this.ls.command,
       this.cd.command,
       this.reset.command,
+      this.cat.command,
     ];
   }
 }

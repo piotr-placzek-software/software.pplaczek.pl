@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { vfs } from '../virtual-file-system';
-import { VFSNode } from '../virtual-file-system.types';
+import { VFSNode, VFSNodeFile } from '../virtual-file-system.types';
 import {
   calculateSize,
   prependDotsDirectories,
@@ -87,6 +87,31 @@ export class VirtualFileSystemService {
 
     this.setCurrentWorkingDirectory(targetPath);
     console.log(targetPath);
+  }
+
+  public getFile(path: string): VFSNodeFile {
+    //!TODO throw error for epmty string
+    const targetPath = resolvePath(
+      path,
+      this.currWorkDir.join('/'),
+      this.homeDirPath,
+    );
+
+    if (!targetPath.startsWith(this.homeDirPath)) {
+      throwAccessDeniedError();
+    }
+
+    const list = this.listDirectory(targetPath);
+
+    if (!list.length) {
+      throwCdNoSuchFileOrDirectoryError(path);
+    }
+
+    if (list.length === 1 && list[0].type === 'file') {
+      return list[0];
+    }
+
+    throw new Error('EoF');
   }
 
   private listDirectory(path: string): VFSNode[] {
