@@ -24,10 +24,19 @@ export class TerminalOutputComponent implements AfterViewInit {
   }
 
   public add(data: CommandOutput): void {
-    if (data.type === 'clear') {
-      this.clear();
-    } else {
-      this.service.createComponent(this.container, data);
+    switch (data.type) {
+      case 'clear':
+        this.clear();
+        break;
+
+      case 'reset':
+        this.clear();
+        this.container.createComponent(TerminalWelcomeMessageComponent);
+        break;
+
+      default:
+        this.service.createComponent(this.container, data);
+        break;
     }
   }
 

@@ -4,6 +4,7 @@ import { DateTerminalCommandService } from './date-terminal-command.service';
 import { ClearTerminalCommandService } from './clear-terminal-command.service';
 import { LsTerminalCommandService } from './ls-terminal-command.service';
 import { CdTerminalCommandService } from './cd-terminal-command.service';
+import { ResetTerminalCommandService } from './reset-terminal-command.service';
 
 export abstract class TerminalCommand {
   public abstract readonly command: Command;
@@ -14,6 +15,7 @@ export const providers = [
   DateTerminalCommandService,
   LsTerminalCommandService,
   CdTerminalCommandService,
+  ResetTerminalCommandService,
 ];
 
 @Injectable()
@@ -23,6 +25,7 @@ export class SupportedTerminalCommandsService {
     private readonly date: DateTerminalCommandService,
     private readonly ls: LsTerminalCommandService,
     private readonly cd: CdTerminalCommandService,
+    private readonly reset: ResetTerminalCommandService,
   ) {}
 
   get commands(): Command[] {
@@ -31,6 +34,7 @@ export class SupportedTerminalCommandsService {
       this.date.command,
       this.ls.command,
       this.cd.command,
+      this.reset.command,
     ];
   }
 }

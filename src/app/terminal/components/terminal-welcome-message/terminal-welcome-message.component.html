@@ -1,10 +1,10 @@
-<div class="app-terminal-welcome-message flex flex-col gap-1 mb-1">
-  <!--<div class="splash text-center w-fit whitespace-pre text-yellow-500">-->
-  <!--  {{ splash }}-->
-  <!--</div>-->
-  <div class="adnotations">
-    <span class="block" *ngFor="let adnotation of adnotations">{{
-      adnotation
-    }}</span>
+<div class="app-terminal-welcome-message mb-2">
+  <div class="flex gap-2">
+    <img src="me.png" />
+    <div class="flex flex-col gap-1">
+      <span class="block" *ngFor="let adnotation of adnotations">{{
+        adnotation
+      }}</span>
+    </div>
   </div>
 </div>

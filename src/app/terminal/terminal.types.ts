@@ -1,4 +1,9 @@
-export const SupportedCommandOutputTypes = ['clear', 'simple', 'help'] as const;
+export const SupportedCommandOutputTypes = [
+  'clear',
+  'simple',
+  'help',
+  'reset',
+] as const;
 
 export type CommandOutputType = (typeof SupportedCommandOutputTypes)[number];
 
@@ -49,4 +54,10 @@ export class TableCommandOutput
     public readonly command: CommandSrc,
     public readonly data: CommandTableOutputDataType,
   ) {}
+}
+
+export class ResetCommandOutput implements CommandOutput<undefined> {
+  public readonly type = 'reset';
+  public readonly data = undefined;
+  public readonly command = { cmd: 'reset', argv: [] };
 }

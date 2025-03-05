@@ -27,6 +27,11 @@ export class TerminalCommandsService {
       desc: 'Prints available commands',
       func: this.helpCommandHandler(),
     },
+    {
+      name: '?',
+      desc: 'Prints available commands',
+      func: this.helpCommandHandler(),
+    },
   ];
 
   public handlePromptInput(input: string): void {
@@ -55,10 +60,12 @@ export class TerminalCommandsService {
   }
 
   private helpCommandHandler(): CommandHandlerFn {
+    const excludedCommands = ['?'];
     return (argv: CommandArguments) =>
       new TableCommandOutput(
         { cmd: 'help', argv },
         this.commands
+          .filter((command) => !excludedCommands.includes(command.name))
           .sort((a, b) => a.name.localeCompare(b.name))
           .map(({ name, desc }) => [name, desc]),
       );

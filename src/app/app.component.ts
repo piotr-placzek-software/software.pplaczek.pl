@@ -11,7 +11,7 @@ import {
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements AfterViewChecked {
-  title = 'software.pplaczek.pl';
+  public readonly title = 'software.pplaczek.pl';
 
   @ViewChild('terminal', { static: false })
   private readonly terminalElementRef!: ElementRef;
@@ -24,6 +24,10 @@ export class AppComponent implements AfterViewChecked {
     if (this.terminalElementRef) {
       this.terminalElementRef.nativeElement.scrollTop =
         this.terminalElementRef.nativeElement.scrollHeight;
+      //this.terminalElementRef.nativeElement.scrollTo({
+      //  top: this.terminalElementRef.nativeElement.scrollHeight,
+      //  behavior: 'smooth',
+      //});
     }
   }
 }

@@ -5,18 +5,12 @@ import { Component } from '@angular/core';
   styleUrl: './terminal-welcome-message.component.scss',
 })
 export class TerminalWelcomeMessageComponent {
-  //  public readonly splash = `
-  //  ___  _ ____ ___ ____    ___  _    ____ ____ ___  ____ _  _
-  //|__] | |  |  |  |__/    |__] |    |__| |      /  |___ |_/
-  // |    | |__|  |  |  \\    |    |___ |  | |___  /__ |___ | \\_
-  //
-  //____ ____ ____ ___ _ _ _ ____ ____ ____
-  //[__  |  | |___  |  | | | |__| |__/ |___
-  //___] |__| |     |  |_|_| |  | |  \\ |___
-  //
-  //    `;
-
   public readonly adnotations = [
-    "Type 'help' to see list fo available commands",
+    'Welcome to Piotr Płaczek Software SP website!',
+    '',
+    "My name is Piotr and I'm fullstack web software engineer.",
+    'What can I do for you today?',
+    '',
+    "Type 'help' to see list fo available commands.",
   ];
 }
