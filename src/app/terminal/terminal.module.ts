@@ -14,6 +14,7 @@ import {
 } from './commands/terminal-command';
 import { TerminalWelcomeMessageComponent } from './components/terminal-welcome-message/terminal-welcome-message.component';
 import { TerminalTableOutputComponent } from './components/terminal-table-output/terminal-table-output.component';
+import { VirtualFileSystemModule } from '../virtual-file-system/virtual-file-system.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { TerminalTableOutputComponent } from './components/terminal-table-output
     TerminalSimpleOutputComponent,
     TerminalTableOutputComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, VirtualFileSystemModule],
   providers: [
     TerminalCommandsHistoryService,
     TerminalOutputService,

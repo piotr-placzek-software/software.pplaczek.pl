@@ -49,7 +49,7 @@ export class TerminalCommandsService {
     this.commandOutput.next(
       new SimpleCommandOutput(
         { cmd, argv },
-        `Command '${cmd}' not found. Type 'help' to list available commands`,
+        `Command '${cmd}' not found. Type 'help' to list available commands.`,
       ),
     );
   }
