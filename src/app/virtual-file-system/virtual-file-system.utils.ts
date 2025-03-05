@@ -3,16 +3,22 @@ import { VFSNode } from './virtual-file-system.types';
 export function resolvePath(
   path: string,
   currWorkDir: string,
-  rootDirPath: string,
+  homeDirPath: string,
 ): string {
-  let targetPath = currWorkDir;
-
   if (path.startsWith('~')) {
-    targetPath = path.replace('~', rootDirPath);
+    return resolvePath(
+      path.replace('~', homeDirPath),
+      currWorkDir,
+      homeDirPath,
+    );
   }
+
+  let targetPath = currWorkDir;
 
   if (path.includes('..')) {
     targetPath = resolveDottedPath(path, currWorkDir);
+  } else if (path.startsWith('/')) {
+    return path;
   } else if (path.length && path !== '.') {
     targetPath = `${currWorkDir}/${path}`;
   }
@@ -84,10 +90,25 @@ export function prependDotsDirectories(
   return dotsDirectories.concat(nodes);
 }
 
-export function throwAccesDeniedError(): void {
-  throw new Error("You don't have permissions to list this directory.");
+export function transformHomeDirectoryPathIntoTilde(
+  absolutePath: string[],
+  absoluteHomePath: string,
+): string[] {
+  return absolutePath.join('/').replace(absoluteHomePath, '~').split('/');
+}
+
+export function throwAccessDeniedError(): void {
+  throw new Error('Access denied.');
 }
 
 export function throwNoSuchFileOrDirectoryError(path: string): void {
   throw new Error(`"${path}" No such file or directory (os error 2)`);
+}
+
+export function throwCdNoSuchFileOrDirectoryError(path: string): void {
+  throw new Error(`cd: ${path}: No such file or directory`);
+}
+
+export function throwCdNotADirectoryError(path: string): void {
+  throw new Error(`cd: ${path}: Not a directory`);
 }

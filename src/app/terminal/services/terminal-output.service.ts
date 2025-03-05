@@ -3,6 +3,7 @@ import { CommandArguments, CommandOutput } from '../terminal.types';
 import { TerminalSimpleOutputComponent } from '../components/teminal-simple-output/terminal-simple-output.component';
 import { TerminalPromptComponent } from '../components/terminal-prompt/terminal-prompt.component';
 import { TerminalTableOutputComponent } from '../components/terminal-table-output/terminal-table-output.component';
+import { VirtualFileSystemService } from '../../virtual-file-system/services/virtual-file-system.service';
 
 type TerminalOutputComponent =
   | TerminalSimpleOutputComponent
@@ -10,6 +11,8 @@ type TerminalOutputComponent =
 
 @Injectable()
 export class TerminalOutputService {
+  constructor(private readonly virtualFileSystem: VirtualFileSystemService) {}
+
   public createComponent(
     container: ViewContainerRef,
     data: CommandOutput,
@@ -32,6 +35,7 @@ export class TerminalOutputService {
     const componentRef = container.createComponent(TerminalPromptComponent);
 
     Object.assign(componentRef.instance, {
+      workingDirectory: this.virtualFileSystem.workingDirectory,
       staticValue: `${cmd} ${argv.join(' ')}`,
     });
   }

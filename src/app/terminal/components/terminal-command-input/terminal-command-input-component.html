@@ -1,5 +1,7 @@
 <div class="flex">
-  <app-terminal-prompt></app-terminal-prompt>
+  <app-terminal-prompt
+    [workingDirectory]="workingDirectory"
+  ></app-terminal-prompt>
   <input
     #input
     class="app-terminal-prompt-input flex-grow"

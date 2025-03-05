@@ -8,6 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { TerminalCommandsHistoryService } from '../../services/terminal-commands-history.service';
+import { VirtualFileSystemService } from '../../../virtual-file-system/services/virtual-file-system.service';
 
 @Component({
   selector: 'app-terminal-command-input',
@@ -20,7 +21,12 @@ export class TerminalCommandInputComponent implements AfterViewInit {
 
   constructor(
     private readonly commandsHistory: TerminalCommandsHistoryService,
+    private readonly virtualFileSystem: VirtualFileSystemService,
   ) {}
+
+  get workingDirectory(): string[] {
+    return this.virtualFileSystem.currentWorkingDirectory;
+  }
 
   public onKeyDown($event: Event): void {
     const { code, ctrlKey } = $event as KeyboardEvent;

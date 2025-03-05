@@ -1,0 +1,7 @@
+<div class="app-terminal-complex-output">
+  <pre *ngIf="!rich; else richText">{{ data }}</pre>
+</div>
+
+<ng-template #richText>
+  <code [highlight]="data" [language]="format"></code>
+</ng-template>
