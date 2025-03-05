@@ -1,5 +1,10 @@
 import { VFSNode } from './virtual-file-system.types';
 import { aboutMeVirtualFileContent } from './virtual-files/aboutme.md';
+import { chessgrowVirtualFileContent } from './virtual-files/chessgrow.md';
+import { ekm3VirtualFileContent } from './virtual-files/ekm3.md';
+import { fenixVirtualFileContent } from './virtual-files/fenix.md';
+import { platformaVirtualFileContent } from './virtual-files/platforma.md';
+import { smartflowVirtualFileContent } from './virtual-files/smartflow.md';
 
 export const vfs: ReadonlyArray<VFSNode> = [
   {
@@ -14,46 +19,46 @@ export const vfs: ReadonlyArray<VFSNode> = [
     type: 'dir',
     name: 'projects',
   },
-  {
-    root: '/home/guest/projects',
-    type: 'file',
-    name: 'fpv-calc.md',
-    format: 'markdown',
-    content: '# FPV Calc',
-  },
+  //{
+  //  root: '/home/guest/projects',
+  //  type: 'file',
+  //  name: 'fpv-calc.md',
+  //  format: 'markdown',
+  //  content: '# FPV Calc',
+  //},
   {
     root: '/home/guest/projects',
     type: 'file',
     name: 'fenix.md',
     format: 'markdown',
-    content: '# Fenix',
+    content: fenixVirtualFileContent,
   },
   {
     root: '/home/guest/projects',
     type: 'file',
     name: 'platforma.md',
     format: 'markdown',
-    content: '# Plaforma',
+    content: platformaVirtualFileContent,
   },
   {
     root: '/home/guest/projects',
     type: 'file',
     name: 'chessgrow.md',
     format: 'markdown',
-    content: '# ChessGrow',
+    content: chessgrowVirtualFileContent,
   },
   {
     root: '/home/guest/projects',
     type: 'file',
     name: 'smartflow.md',
     format: 'markdown',
-    content: '# SmartFlow',
+    content: smartflowVirtualFileContent,
   },
   {
     root: '/home/guest/projects',
     type: 'file',
     name: 'ekm3.md',
     format: 'markdown',
-    content: '# EKM (3) Smart',
+    content: ekm3VirtualFileContent,
   },
 ];
