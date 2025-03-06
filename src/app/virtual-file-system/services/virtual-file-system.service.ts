@@ -7,6 +7,7 @@ import {
   removeContent,
   resolvePath,
   throwAccessDeniedError,
+  throwCatNotAFileError,
   throwCdNoSuchFileOrDirectoryError,
   throwCdNotADirectoryError,
   throwNoSuchFileOrDirectoryError,
@@ -37,60 +38,59 @@ export class VirtualFileSystemService {
   public getDirectoryContentList(
     path: string = '',
   ): Omit<VFSNode, 'content'>[] {
-    const targetPath = resolvePath(
-      path,
-      this.currWorkDir.join('/'),
-      this.homeDirPath,
+    const { targetPath, nodes } = this.getNodes(path, {
+      accesDenied: throwAccessDeniedError,
+      notFound: throwNoSuchFileOrDirectoryError,
+    });
+
+    if (nodes.length === 1 && nodes[0].type === 'file') {
+      return nodes.map(calculateSize).map(removeContent);
+    }
+
+    return prependDotsDirectories(
+      targetPath,
+      nodes.map(calculateSize).map(removeContent),
     );
-
-    if (!targetPath.startsWith(this.homeDirPath)) {
-      throwAccessDeniedError();
-    }
-
-    const list = this.listDirectory(targetPath)
-      .map(calculateSize)
-      .map(removeContent);
-
-    if (!list.length) {
-      throwNoSuchFileOrDirectoryError(path);
-    }
-
-    if (list.length === 1 && list[0].type === 'file') {
-      return list;
-    }
-
-    return prependDotsDirectories(targetPath, list);
   }
 
   public navigateToDirectory(path: string = '~'): void {
-    const targetPath = resolvePath(
-      path,
-      this.currWorkDir.join('/'),
-      this.homeDirPath,
-    );
+    const { targetPath, nodes } = this.getNodes(path, {
+      accesDenied: throwAccessDeniedError,
+      notFound: throwCdNoSuchFileOrDirectoryError,
+    });
 
-    if (!targetPath.startsWith(this.homeDirPath)) {
-      throwAccessDeniedError();
-    }
-
-    const list = this.listDirectory(targetPath)
-      .map(calculateSize)
-      .map(removeContent);
-
-    if (!list.length) {
-      throwCdNoSuchFileOrDirectoryError(path);
-    }
-
-    if (list.length === 1 && list[0].type === 'file') {
+    if (nodes.length === 1 && nodes[0].type === 'file') {
       throwCdNotADirectoryError(path);
     }
 
     this.setCurrentWorkingDirectory(targetPath);
-    console.log(targetPath);
   }
 
   public getFile(path: string): VFSNodeFile {
-    //!TODO throw error for epmty string
+    if (!path) {
+      // TODO support for '-h' switch
+      throw new Error('');
+    }
+
+    const { nodes } = this.getNodes(path, {
+      accesDenied: throwAccessDeniedError,
+      notFound: throwCdNoSuchFileOrDirectoryError,
+    });
+
+    if (nodes.length === 1 && nodes[0].type === 'file') {
+      return nodes[0];
+    }
+
+    throwCatNotAFileError(path);
+    // INFO return is unreachable in case of throwing an error above;
+    // TODO improve error handling
+    return { name: '', root: '', type: 'file', format: 'plain', content: '' };
+  }
+
+  private getNodes(
+    path: string,
+    throwError: { accesDenied: () => void; notFound: (path: string) => void },
+  ): { targetPath: string; nodes: VFSNode[] } {
     const targetPath = resolvePath(
       path,
       this.currWorkDir.join('/'),
@@ -98,24 +98,19 @@ export class VirtualFileSystemService {
     );
 
     if (!targetPath.startsWith(this.homeDirPath)) {
-      throwAccessDeniedError();
+      throwError.accesDenied();
     }
 
-    const list = this.listDirectory(targetPath);
+    let nodes = this.listDirectory(targetPath);
 
-    if (!list.length) {
-      throwCdNoSuchFileOrDirectoryError(path);
+    if (!nodes.length) {
+      throwError.notFound(path);
     }
 
-    if (list.length === 1 && list[0].type === 'file') {
-      return list[0];
-    }
-
-    throw new Error('EoF');
+    return { targetPath, nodes };
   }
 
   private listDirectory(path: string): VFSNode[] {
-    console.log('listing directory', path);
     return vfs.filter(
       (node: VFSNode): boolean =>
         node.root === path ||
@@ -125,6 +120,5 @@ export class VirtualFileSystemService {
 
   private setCurrentWorkingDirectory(path: string): void {
     this.currWorkDir = path.split('/');
-    console.log(this.currWorkDir);
   }
 }
