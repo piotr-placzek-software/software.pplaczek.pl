@@ -11,7 +11,7 @@ import {
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements AfterViewChecked {
-  public readonly title = 'software.pplaczek.pl';
+  public readonly version = 'v1.0.1';
 
   @ViewChild('terminal', { static: false })
   private readonly terminalElementRef!: ElementRef;

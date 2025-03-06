@@ -8,9 +8,9 @@ export class TerminalWelcomeMessageComponent {
   public readonly adnotations = [
     'Welcome to Piotr Płaczek Software SP website!',
     '',
-    "My name is Piotr and I'm fullstack web software engineer.",
+    "My name is Piotr and I'm fullstack software engineer.",
     'What can I do for you today?',
     '',
-    "Type 'help' to see list fo available commands.",
+    "Type 'help' to see list of available commands.",
   ];
 }
