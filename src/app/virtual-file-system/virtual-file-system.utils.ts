@@ -112,3 +112,7 @@ export function throwCdNoSuchFileOrDirectoryError(path: string): void {
 export function throwCdNotADirectoryError(path: string): void {
   throw new Error(`cd: ${path}: Not a directory`);
 }
+
+export function throwCatNotAFileError(path: string): void {
+  throw new Error(`${path}: Not a file`);
+}
