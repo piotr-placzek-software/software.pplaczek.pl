@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { TerminalCommandsHistoryService } from '../../services/terminal-commands-history.service';
 import { VirtualFileSystemService } from '../../../virtual-file-system/services/virtual-file-system.service';
+import { AutocopleteService } from '../../../common/services/autocomplete.service';
 
 @Component({
   selector: 'app-terminal-command-input',
@@ -22,6 +23,7 @@ export class TerminalCommandInputComponent implements AfterViewInit {
   constructor(
     private readonly commandsHistory: TerminalCommandsHistoryService,
     private readonly virtualFileSystem: VirtualFileSystemService,
+    private readonly autocompleteService: AutocopleteService,
   ) {}
 
   get workingDirectory(): string[] {
@@ -38,6 +40,12 @@ export class TerminalCommandInputComponent implements AfterViewInit {
 
       case 'Tab':
         $event.preventDefault();
+        srcElement.value = this.autocompleteService.autocomplete(
+          srcElement.value.trim(),
+          this.virtualFileSystem.currentWorkingDirectory
+            .join('/')
+            .replace('~', this.virtualFileSystem.homeDirPath),
+        );
         break;
 
       case 'ArrowUp':

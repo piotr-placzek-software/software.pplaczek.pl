@@ -1,5 +1,4 @@
 - support for -h command switch
-- support Tab autocompletion
 - support CtrlW for removing word at the left from cursor
 - create command for quick-links: take link name from first argument and open corelated webpage at new tab
 - add contact info as file and command (with parameters for displayng only selected info)
