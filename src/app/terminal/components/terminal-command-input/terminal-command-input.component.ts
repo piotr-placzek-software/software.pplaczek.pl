@@ -31,7 +31,7 @@ export class TerminalCommandInputComponent implements AfterViewInit {
   }
 
   public onKeyDown($event: Event): void {
-    const { code, ctrlKey } = $event as KeyboardEvent;
+    const { code, ctrlKey, shiftKey } = $event as KeyboardEvent;
     const srcElement = $event.srcElement! as HTMLInputElement;
     switch (code) {
       case 'Enter':
@@ -87,6 +87,13 @@ export class TerminalCommandInputComponent implements AfterViewInit {
         }
         break;
 
+      case 'Slash':
+        if (shiftKey) {
+          this.submitHelpAlias();
+          $event.preventDefault();
+        }
+        break;
+
       default:
         break;
     }
@@ -136,5 +143,9 @@ export class TerminalCommandInputComponent implements AfterViewInit {
       element.value.substring(0, lastSeparatorIndex + 1) +
       element.value.substring(cursorPosition);
     element.setSelectionRange(lastSeparatorIndex + 1, lastSeparatorIndex + 1);
+  }
+
+  private submitHelpAlias() {
+    this.command.emit('help');
   }
 }

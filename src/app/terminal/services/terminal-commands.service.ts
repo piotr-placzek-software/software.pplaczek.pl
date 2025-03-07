@@ -27,11 +27,6 @@ export class TerminalCommandsService {
       desc: 'Prints available commands',
       func: this.helpCommandHandler(),
     },
-    {
-      name: '?',
-      desc: 'Prints available commands',
-      func: this.helpCommandHandler(),
-    },
   ];
 
   public handlePromptInput(input: string): void {
