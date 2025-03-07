@@ -17,3 +17,32 @@ body {
   background-position: center center;
   // background-image: url('/bg-pattern.png');
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-terminal-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-terminal-gray);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-terminal-blue);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--color-terminal-dark);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: var(--color-terminal-gray) var(--color-terminal-dark);
+}
+
