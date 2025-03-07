@@ -3,6 +3,7 @@ import { aboutMeVirtualFileContent } from './virtual-files/aboutme.md';
 import { chessgrowVirtualFileContent } from './virtual-files/chessgrow.md';
 import { ekm3VirtualFileContent } from './virtual-files/ekm3.md';
 import { fenixVirtualFileContent } from './virtual-files/fenix.md';
+import { fpvCalcVirtualFileContent } from './virtual-files/fpv-calc.md';
 import { platformaVirtualFileContent } from './virtual-files/platforma.md';
 import { smartflowVirtualFileContent } from './virtual-files/smartflow.md';
 
@@ -19,13 +20,13 @@ export const vfs: ReadonlyArray<VFSNode> = [
     type: 'dir',
     name: 'projects',
   },
-  //{
-  //  root: '/home/guest/projects',
-  //  type: 'file',
-  //  name: 'fpv-calc.md',
-  //  format: 'markdown',
-  //  content: '# FPV Calc',
-  //},
+  {
+    root: '/home/guest/projects',
+    type: 'file',
+    name: 'fpv-calc.md',
+    format: 'markdown',
+    content: fpvCalcVirtualFileContent,
+  },
   {
     root: '/home/guest/projects',
     type: 'file',
