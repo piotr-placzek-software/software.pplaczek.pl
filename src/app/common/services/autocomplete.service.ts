@@ -8,12 +8,10 @@ export class AutocopleteService {
   private fsTree: string[] = [];
 
   public setCommandsNames(commands: string[]): void {
-    console.debug(commands);
     this.commands = commands;
   }
 
   public setFileSystemTree(paths: string[]): void {
-    console.debug(paths);
     this.fsTree = paths;
   }
 
