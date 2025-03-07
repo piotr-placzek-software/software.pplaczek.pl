@@ -1,7 +1,6 @@
 - support for -h command switch
 - support CtrlW for removing word at the left from cursor
 - create command for quick-links: take link name from first argument and open corelated webpage at new tab
-- add contact info as file and command (with parameters for displayng only selected info)
 - fix articles about projects
 - simplify commands that dont need to be a service
 

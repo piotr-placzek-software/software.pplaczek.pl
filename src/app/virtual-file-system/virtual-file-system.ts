@@ -1,6 +1,7 @@
 import { VFSNode } from './virtual-file-system.types';
 import { aboutMeVirtualFileContent } from './virtual-files/aboutme.md';
 import { chessgrowVirtualFileContent } from './virtual-files/chessgrow.md';
+import { contactVirtualFileContent } from './virtual-files/contact.md';
 import { ekm3VirtualFileContent } from './virtual-files/ekm3.md';
 import { fenixVirtualFileContent } from './virtual-files/fenix.md';
 import { fpvCalcVirtualFileContent } from './virtual-files/fpv-calc.md';
@@ -14,6 +15,13 @@ export const vfs: ReadonlyArray<VFSNode> = [
     name: 'aboutme.md',
     format: 'markdown',
     content: aboutMeVirtualFileContent,
+  },
+  {
+    root: '/home/guest',
+    type: 'file',
+    name: 'contact.md',
+    format: 'markdown',
+    content: contactVirtualFileContent,
   },
   {
     root: '/home/guest',
