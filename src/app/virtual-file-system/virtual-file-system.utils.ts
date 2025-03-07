@@ -5,6 +5,10 @@ export function resolvePath(
   currWorkDir: string,
   homeDirPath: string,
 ): string {
+  if (path.endsWith('/')) {
+    path = path.slice(-1);
+  }
+
   if (path.startsWith('~')) {
     return resolvePath(
       path.replace('~', homeDirPath),

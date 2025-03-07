@@ -14,6 +14,7 @@ import {
   VFSNotAFileError,
   VFSNotFoundError,
 } from '../virtual-file-system.errors';
+import { AutocopleteService } from '../../common/services/autocomplete.service';
 
 @Injectable()
 export class VirtualFileSystemService {
@@ -34,6 +35,12 @@ export class VirtualFileSystemService {
       this.prevWorkDir = this.currWorkDir;
     }
     return transformHomeDirectoryPathIntoTilde(returnValue, this.homeDirPath);
+  }
+
+  constructor(readonly autocompleteService: AutocopleteService) {
+    autocompleteService.setFileSystemTree(
+      vfs.map((node: VFSNode): string => `${node.root}/${node.name}`),
+    );
   }
 
   public getDirectoryContentList(
