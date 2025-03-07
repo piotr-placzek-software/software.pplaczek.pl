@@ -5,10 +5,15 @@ import {
   CommandArguments,
   CommandHandlerFn,
   CommandOutput,
+  CommandSrc,
   PrintFileCommandOutput,
   SimpleCommandOutput,
 } from '../terminal.types';
 import { VirtualFileSystemService } from '../../virtual-file-system/services/virtual-file-system.service';
+import {
+  VFSError,
+  VFSErrorType,
+} from '../../virtual-file-system/virtual-file-system.errors';
 
 @Injectable()
 export class CatTerminalCommandService implements TerminalCommand {
@@ -36,14 +41,27 @@ export class CatTerminalCommandService implements TerminalCommand {
           },
         );
       } catch (error: any) {
-        return new SimpleCommandOutput(
+        return this.handleError(
           {
             cmd: this.command.name,
             argv: argv,
           },
-          error.message,
+          error,
         );
       }
     };
+  }
+
+  private handleError(
+    command: CommandSrc,
+    { type, path }: VFSError,
+  ): CommandOutput {
+    const message =
+      type === VFSErrorType.NOT_A_FILE
+        ? `cd: ${path}: No such file or directory`
+        : type === VFSErrorType.ACCES_DENIED
+          ? 'Access denied.'
+          : `Unknown error: ${type}`;
+    return new SimpleCommandOutput(command, message);
   }
 }

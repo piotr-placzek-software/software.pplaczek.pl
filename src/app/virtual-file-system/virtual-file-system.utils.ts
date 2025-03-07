@@ -96,23 +96,3 @@ export function transformHomeDirectoryPathIntoTilde(
 ): string[] {
   return absolutePath.join('/').replace(absoluteHomePath, '~').split('/');
 }
-
-export function throwAccessDeniedError(): void {
-  throw new Error('Access denied.');
-}
-
-export function throwNoSuchFileOrDirectoryError(path: string): void {
-  throw new Error(`"${path}" No such file or directory (os error 2)`);
-}
-
-export function throwCdNoSuchFileOrDirectoryError(path: string): void {
-  throw new Error(`cd: ${path}: No such file or directory`);
-}
-
-export function throwCdNotADirectoryError(path: string): void {
-  throw new Error(`cd: ${path}: Not a directory`);
-}
-
-export function throwCatNotAFileError(path: string): void {
-  throw new Error(`${path}: Not a file`);
-}
