@@ -4,11 +4,17 @@ import {
   Command,
   CommandArguments,
   CommandHandlerFn,
+  CommandOutput,
+  CommandSrc,
   SimpleCommandOutput,
   TableCommandOutput,
 } from '../terminal.types';
 import { VirtualFileSystemService } from '../../virtual-file-system/services/virtual-file-system.service';
 import { VFSNode as SrcVFSNode } from '../../virtual-file-system/virtual-file-system.types';
+import {
+  VFSError,
+  VFSErrorType,
+} from '../../virtual-file-system/virtual-file-system.errors';
 
 type VFSNode = Omit<SrcVFSNode, 'content'>;
 
@@ -36,12 +42,12 @@ export class LsTerminalCommandService implements TerminalCommand {
           ),
         );
       } catch (error: any) {
-        return new SimpleCommandOutput(
+        return this.handleError(
           {
             cmd: this.command.name,
             argv: argv,
           },
-          error.message,
+          error,
         );
       }
     };
@@ -69,5 +75,18 @@ export class LsTerminalCommandService implements TerminalCommand {
       node.size || '-',
       node.name,
     ]);
+  }
+
+  private handleError(
+    command: CommandSrc,
+    { type, path }: VFSError,
+  ): CommandOutput {
+    const message =
+      type === VFSErrorType.NOT_FOUND
+        ? `"${path}" No such file or directory (os error 2)`
+        : type === VFSErrorType.ACCES_DENIED
+          ? 'Access denied.'
+          : `Unknown error: ${type}`;
+    return new SimpleCommandOutput(command, message);
   }
 }

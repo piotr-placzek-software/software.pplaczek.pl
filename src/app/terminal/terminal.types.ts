@@ -14,7 +14,7 @@ export type CommandOutput<T = any> = {
   data: T;
 };
 
-type CommandSrc = {
+export type CommandSrc = {
   cmd: string;
   argv: CommandArguments;
 };
