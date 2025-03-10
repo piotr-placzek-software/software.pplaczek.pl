@@ -27,6 +27,15 @@ export class CatTerminalCommandService implements TerminalCommand {
 
   private commandHandler(): CommandHandlerFn {
     return (argv: CommandArguments): CommandOutput => {
+      if (argv.includes('-h') || argv.includes('--help')) {
+        return new SimpleCommandOutput(
+          {
+            cmd: this.command.name,
+            argv: argv,
+          },
+          'Usage: cat <path-to-file>',
+        );
+      }
       try {
         const fileNode = this.fileSystemService.getFile(argv[0]);
         return new PrintFileCommandOutput(

@@ -30,6 +30,15 @@ export class LsTerminalCommandService implements TerminalCommand {
 
   private commandHandler(): CommandHandlerFn {
     return (argv: CommandArguments) => {
+      if (argv.includes('-h') || argv.includes('--help')) {
+        return new SimpleCommandOutput(
+          {
+            cmd: this.command.name,
+            argv: argv,
+          },
+          'Usage: ls <path>',
+        );
+      }
       try {
         const nodes = this.fileSystemService.getDirectoryContentList(argv[0]);
         return new TableCommandOutput(
