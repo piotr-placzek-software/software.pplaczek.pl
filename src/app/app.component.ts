@@ -11,7 +11,7 @@ import {
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements AfterViewChecked {
-  public readonly version = 'v1.3.1';
+  public readonly version = 'v1.3.2';
 
   @ViewChild('terminal', { static: false })
   private readonly terminalElementRef!: ElementRef;

@@ -66,10 +66,22 @@ export class TerminalCommandInputComponent implements AfterViewInit {
 
         break;
 
-      case 'KeyK':
-        if (ctrlKey && srcElement.selectionStart === 0) {
+      case 'KeyC':
+        if (ctrlKey) {
           $event.preventDefault();
-          this.clearInput(srcElement);
+          srcElement.value += '^C';
+          this.submitInput(srcElement);
+        }
+
+        break;
+
+      case 'KeyK':
+        if (ctrlKey) {
+          $event.preventDefault();
+          srcElement.value = srcElement.value.slice(
+            0,
+            srcElement.selectionStart || 0,
+          );
         }
         break;
 

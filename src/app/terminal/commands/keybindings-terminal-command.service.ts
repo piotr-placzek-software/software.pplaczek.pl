@@ -15,7 +15,8 @@ export class KeybindingsTerminalCommandService implements TerminalCommand {
         },
         [
           ['Ctrl+a', 'Move cursor at start of input'],
-          ['Ctrl+k', 'Clear input if cursor is at the start of input'],
+          ['Ctrl+c', 'Interrupt a process'],
+          ['Ctrl+k', 'Clear input from cursor to the end of input'],
           [
             'Ctrl+w',
             'Clear word backward from cursor (be careful it may close your browser)',
@@ -23,7 +24,7 @@ export class KeybindingsTerminalCommandService implements TerminalCommand {
           ['Ctrl+l', 'Clear terminal output history'],
           ['Tab', 'Autocomplete input'],
           ['Arrow Up/Down', 'Navigate through input history'],
-          ['?', "Alias for 'help' command"],
+          ['?', 'Print help message'],
         ],
       );
     },
