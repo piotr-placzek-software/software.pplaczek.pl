@@ -11,6 +11,7 @@ export class TerminalWelcomeMessageComponent {
     "My name is Piotr and I'm fullstack software engineer.",
     'What can I do for you today?',
     '',
-    "Type 'help' to see list of available commands.",
+    "Type 'help' to see list of available commands",
+    '(or press Shift+/).',
   ];
 }

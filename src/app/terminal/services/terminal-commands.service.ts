@@ -30,6 +30,13 @@ export class TerminalCommandsService {
   ];
 
   public handlePromptInput(input: string): void {
+    if (input.endsWith('^C')) {
+      this.commandOutput.next(
+        new SimpleCommandOutput({ cmd: input, argv: [] }, ''),
+      );
+      return;
+    }
+
     const argv = input.split(' ');
     const cmd = argv.shift();
 
