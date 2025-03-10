@@ -26,6 +26,15 @@ export class CdTerminalCommandService implements TerminalCommand {
 
   private commandHandler(): CommandHandlerFn {
     return (argv: CommandArguments) => {
+      if (argv.includes('-h') || argv.includes('--help')) {
+        return new SimpleCommandOutput(
+          {
+            cmd: this.command.name,
+            argv: argv,
+          },
+          'Usage: cd <path-to-directory>',
+        );
+      }
       try {
         this.fileSystemService.navigateToDirectory(argv[0]);
         return new SimpleCommandOutput(
