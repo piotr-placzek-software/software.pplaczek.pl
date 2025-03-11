@@ -121,7 +121,9 @@ export class TerminalCommandInputComponent implements AfterViewInit {
     if (!element.value) {
       return;
     }
-    this.commandsHistory.save(element.value);
+    if (!element.value.endsWith('^C')) {
+      this.commandsHistory.save(element.value);
+    }
     this.command.emit(element.value);
     this.clearInput(element);
   }

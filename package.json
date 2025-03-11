@@ -1,6 +1,6 @@
 {
   "name": "software.pplaczek.pl",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
