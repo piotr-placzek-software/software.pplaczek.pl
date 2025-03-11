@@ -8,6 +8,7 @@ import { ResetTerminalCommandService } from './reset-terminal-command.service';
 import { CatTerminalCommandService } from './cat-terminal-command.service';
 import { AutocopleteService } from '../../common/services/autocomplete.service';
 import { KeybindingsTerminalCommandService } from './keybindings-terminal-command.service';
+import { QuicklinksTerminalCommandService } from './quicklinks-terminal-command.service';
 
 export abstract class TerminalCommand {
   public abstract readonly command: Command;
@@ -21,6 +22,7 @@ export const providers = [
   ResetTerminalCommandService,
   CatTerminalCommandService,
   KeybindingsTerminalCommandService,
+  QuicklinksTerminalCommandService,
 ];
 
 @Injectable()
@@ -33,6 +35,7 @@ export class SupportedTerminalCommandsService {
     private readonly reset: ResetTerminalCommandService,
     private readonly cat: CatTerminalCommandService,
     private readonly keybindings: KeybindingsTerminalCommandService,
+    private readonly quicklinks: QuicklinksTerminalCommandService,
     readonly autocompleteService: AutocopleteService,
   ) {
     autocompleteService.setCommandsNames(
@@ -49,6 +52,7 @@ export class SupportedTerminalCommandsService {
       this.reset.command,
       this.cat.command,
       this.keybindings.command,
+      this.quicklinks.command,
     ];
   }
 }
