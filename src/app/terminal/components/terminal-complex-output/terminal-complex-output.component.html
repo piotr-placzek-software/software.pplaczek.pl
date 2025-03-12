@@ -3,6 +3,10 @@
 </div>
 
 <ng-template #richText>
-  <!--<code [highlight]="data" [language]="format"></code>-->
-  <p>not supported yet</p>
+  <ng-container *ngIf="data.format === 'markdown'; else code">
+    <markdown>{{ data.content }}</markdown>
+  </ng-container>
+  <ng-template #code>
+    <p>not supported yet</p>
+  </ng-template>
 </ng-template>

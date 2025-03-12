@@ -3,10 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { TerminalModule } from './terminal/terminal.module';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, TerminalModule],
+  imports: [BrowserModule, TerminalModule, MarkdownModule.forRoot()],
   providers: [],
   bootstrap: [AppComponent],
 })
