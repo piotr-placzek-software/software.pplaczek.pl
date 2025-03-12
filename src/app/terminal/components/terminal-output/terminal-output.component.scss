@@ -1,0 +1,5 @@
+:host ::ng-deep [class$='-output']{
+  border-left: 1px solid var(--color-terminal-gray);
+  margin-left: .3rem;
+  padding-left: .6rem;
+}

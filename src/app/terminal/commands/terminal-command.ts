@@ -9,6 +9,7 @@ import { CatTerminalCommandService } from './cat-terminal-command.service';
 import { AutocopleteService } from '../../common/services/autocomplete.service';
 import { KeybindingsTerminalCommandService } from './keybindings-terminal-command.service';
 import { QuicklinksTerminalCommandService } from './quicklinks-terminal-command.service';
+import { CpgTerminalCommandService } from './cpg-terminal-command.service';
 
 export abstract class TerminalCommand {
   public abstract readonly command: Command;
@@ -23,6 +24,7 @@ export const providers = [
   CatTerminalCommandService,
   KeybindingsTerminalCommandService,
   QuicklinksTerminalCommandService,
+  CpgTerminalCommandService,
 ];
 
 @Injectable()
@@ -36,6 +38,7 @@ export class SupportedTerminalCommandsService {
     private readonly cat: CatTerminalCommandService,
     private readonly keybindings: KeybindingsTerminalCommandService,
     private readonly quicklinks: QuicklinksTerminalCommandService,
+    private readonly cpg: CpgTerminalCommandService,
     readonly autocompleteService: AutocopleteService,
   ) {
     autocompleteService.setCommandsNames(
@@ -53,6 +56,7 @@ export class SupportedTerminalCommandsService {
       this.cat.command,
       this.keybindings.command,
       this.quicklinks.command,
+      this.cpg.command,
     ];
   }
 }
