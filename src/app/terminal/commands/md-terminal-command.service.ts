@@ -9,17 +9,17 @@ import {
   PrintFileCommandOutput,
   SimpleCommandOutput,
 } from '../terminal.types';
-import { VirtualFileSystemService } from '../../virtual-file-system/services/virtual-file-system.service';
 import {
   VFSError,
   VFSErrorType,
 } from '../../virtual-file-system/virtual-file-system.errors';
+import { VirtualFileSystemService } from '../../virtual-file-system/services/virtual-file-system.service';
 
 @Injectable()
-export class CatTerminalCommandService implements TerminalCommand {
+export class MdTerminalCommandService implements TerminalCommand {
   public readonly command: Command = {
-    name: 'cat',
-    desc: 'Prints file (plain)',
+    name: 'md',
+    desc: 'Prints formated markdown file content',
     func: this.commandHandler(),
   };
 
@@ -33,7 +33,7 @@ export class CatTerminalCommandService implements TerminalCommand {
             cmd: this.command.name,
             argv: argv,
           },
-          'Usage: cat <path-to-file>',
+          'Usage: md <path-to-file>',
         );
       }
       try {
@@ -45,8 +45,8 @@ export class CatTerminalCommandService implements TerminalCommand {
           },
           {
             content: fileNode.content,
-            rich: false,
-            format: 'plain',
+            rich: true,
+            format: fileNode.format,
           },
         );
       } catch (error: any) {
@@ -67,7 +67,7 @@ export class CatTerminalCommandService implements TerminalCommand {
   ): CommandOutput {
     const message =
       type === VFSErrorType.NOT_A_FILE
-        ? `cat: ${path}: No such file or directory`
+        ? `md: ${path}: No such file or directory`
         : type === VFSErrorType.ACCES_DENIED
           ? 'Access denied.'
           : `Unknown error: ${type}`;

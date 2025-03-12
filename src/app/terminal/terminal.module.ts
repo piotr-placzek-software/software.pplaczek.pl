@@ -16,6 +16,7 @@ import { TerminalWelcomeMessageComponent } from './components/terminal-welcome-m
 import { TerminalTableOutputComponent } from './components/terminal-table-output/terminal-table-output.component';
 import { VirtualFileSystemModule } from '../virtual-file-system/virtual-file-system.module';
 import { TerminalComplexOutputComponent } from './components/terminal-complex-output/terminal-complex-output.component';
+import { MarkdownModule, MarkdownService } from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { TerminalComplexOutputComponent } from './components/terminal-complex-ou
     TerminalTableOutputComponent,
     TerminalComplexOutputComponent,
   ],
-  imports: [CommonModule, VirtualFileSystemModule],
+  imports: [CommonModule, VirtualFileSystemModule, MarkdownModule.forChild()],
   providers: [
     TerminalCommandsHistoryService,
     TerminalOutputService,
